@@ -1,37 +1,168 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-    <meta charset = "UTF-8">
-    <title> Nuestra Historia :*</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuestra Historia 💖</title>
     <style>
-        body{
-            font-family: Arial, sans-serif;
-            background-color: #fff0f5;
-            text-align: center;
-            padding: 40px;
+        :root {
+            --bg-1: #fff0f5;
+            --bg-2: #ffe4ec;
+            --primary: #d6336c;
+            --secondary: #ff85a2;
+            --text: #5a2a3b;
+            --card: #ffffffcc;
+            --shadow: 0 10px 30px rgba(214, 51, 108, 0.18);
         }
-    hi {
-        color: #d6336c;
-    }
-    p {
-        font-size: 18px;
-        max-width: 600px;
-        margin: auto;
-    }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card);
+            border: 1px solid #ffd2df;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: 36px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before,
+        .container::after {
+            content: "❤";
+            position: absolute;
+            color: #ff9ab5;
+            opacity: 0.3;
+            font-size: 80px;
+            animation: float 5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .container::before {
+            top: -20px;
+            right: 24px;
+        }
+
+        .container::after {
+            bottom: -20px;
+            left: 24px;
+            animation-delay: 1.8s;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            color: var(--primary);
+        }
+
+        .subtitle {
+            text-align: center;
+            margin: 0 auto 28px;
+            max-width: 620px;
+            line-height: 1.6;
+            font-size: 1.06rem;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .moment {
+            background: white;
+            border: 1px solid #ffd6e2;
+            border-radius: 14px;
+            padding: 16px;
+            text-align: left;
+        }
+
+        .moment strong {
+            color: var(--primary);
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .closing {
+            text-align: center;
+            font-size: 1.08rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .signature {
+            margin-top: 10px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 28px 18px;
+            }
+
+            .moment {
+                padding: 14px;
+            }
+        }
     </style>
 </head>
 <body>
+    <main class="container">
+        <h1>Nuestra historia ✨</h1>
+        <p class="subtitle">
+            Todo empezó el día que nos conocimos. Desde entonces, cada momento contigo ha
+            sido especial y se ha convertido en uno de mis recuerdos favoritos.
+        </p>
 
-    <h1>Nuestra historia xD</h1>
-    <p>
-        Tomo empezó el día que nos conocimos...
-        Desde entonces, cada momento contigo ha sido especial.
-    </p>
+        <section class="timeline" aria-label="Momentos especiales">
+            <article class="moment">
+                <strong>📍 El comienzo</strong>
+                <div>La primera vez que hablamos, supe que había algo muy bonito entre nosotros.</div>
+            </article>
+            <article class="moment">
+                <strong>💬 Nuestras charlas</strong>
+                <div>Con cada conversación, me fui enamorando de tu forma de ser.</div>
+            </article>
+            <article class="moment">
+                <strong>🌷 Lo que construimos</strong>
+                <div>Pequeños detalles, risas y cariño que hicieron grande nuestra historia.</div>
+            </article>
+        </section>
 
-    <p>
-        Gracias por ser mi persona favorita.
-            Feliz San Valentín
-    </p>
+        <p class="closing">
+            Gracias por ser mi persona favorita.<br />
+            Feliz San Valentín 💘
+        </p>
+        <p class="signature">Con mucho amor ❤️</p>
+    </main>
 </body>
 </html>
