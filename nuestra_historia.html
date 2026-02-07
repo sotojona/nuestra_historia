@@ -100,6 +100,12 @@
             margin-bottom: 4px;
         }
 
+        .moment img{ 
+            max-width:100%;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
         .closing {
             text-align: center;
             font-size: 1.08rem;
@@ -136,25 +142,39 @@
     </style>
 </head>
 <body>
+
+    <!-- Musica de fondo -->
+     <audio autolpay loop>
+        <source src="cafe_con_leche.mp3" type="audio/mpeg">
+        tu navegador no soporta la reproduccion de audio.
+     </audio>
     <main class="container">
         <h1>Nuestra historia ✨</h1>
         <p class="subtitle">
             Todo empezó el día que nos conocimos. Desde entonces, cada momento contigo ha
             sido especial y se ha convertido en uno de mis recuerdos favoritos.
-        </p>
 
+            Por eso en este dia quiero rememorar contigo algunos de esos momentos 😊
+        </p>
+        <!-- Pimer subapartado -->
         <section class="timeline" aria-label="Momentos especiales">
             <article class="moment">
                 <strong>📍 El comienzo</strong>
-                <div>La primera vez que hablamos, supe que había algo muy bonito entre nosotros.</div>
+                <div>De las primeras veces que haciamos videollamadas, supe que había algo muy bonito entre nosotros.
+                    <img scr="foto1.jpg" alt="Primer encuentro">
+                </div>
             </article>
             <article class="moment">
                 <strong>💬 Nuestras charlas</strong>
-                <div>Con cada conversación, me fui enamorando de tu forma de ser.</div>
+                <div>Con cada conversación, me fui enamorando de tu forma de ser.
+                     <img scr="foto2.jpg" alt="Charlas">
+                </div>
             </article>
             <article class="moment">
                 <strong>🌷 Lo que construimos</strong>
-                <div>Pequeños detalles, risas y cariño que hicieron grande nuestra historia.</div>
+                <div>Pequeños detalles, risas y cariño que hicieron grande nuestra historia.
+                     <img scr="foto3.jpg" alt="Recuerdos">
+                </div>
             </article>
         </section>
 
