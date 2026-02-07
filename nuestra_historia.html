@@ -100,14 +100,55 @@
             margin-bottom: 4px;
         }
 
-        .moment img{ 
-            max-width:50%;
-            border-radius: 12px;
-            margin-top: 10px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+                    /* Descripción del momento */
+        .moment-description {
+                margin-top: 8px;
+                margin-bottom: 10px;
+                line-height: 1.5;
+                text-align: center;
+                font-size: 1rem;
+                color: var(--text);
         }
+
+            /* Carrusel */
+        .moment .carousel {
+                position: relative;
+                width: 100%;
+                height: 250px;
+                overflow: hidden;
+                margin-top: 10px;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .moment .carousel-inner {
+                display: flex;
+                transition: transform 0.5s ease;
+        }
+
+        .moment .carousel-inner img {
+                width: 100%;
+                flex-shrink: 0;
+                object-fit: cover;
+                border-radius: 12px;
+        }
+
+        .moment button.prev,
+        .moment button.next {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: rgba(0,0,0,0.4);
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                cursor: pointer;
+                border-radius: 50%;
+                font-size: 20px;
+            }
+
+        .moment button.prev { left: 10px; }
+        .moment button.next { right: 10px; }
 
         .closing {
             text-align: center;
@@ -237,25 +278,71 @@
 
             Por eso en este dia quiero rememorar contigo algunos de esos momentos 😊
         </p>
-        <!-- Pimer subapartado -->
+        
         <section class="timeline" aria-label="Momentos especiales">
+
+            <!-- Pimer subapartado -->
             <article class="moment">
                 <strong>📍 El comienzo</strong>
-                <div>De las primeras veces que haciamos videollamadas, supe que había algo muy bonito entre nosotros.
-                    <img src="foto1.jpeg" alt="Primer encuentro">
+                <div class = "moment-description">
+                    De las primeras quedadas y videollamadas, supe que había algo muy bonito entre nosotros.
+                </div>
+                <div class = "carousel">
+                    <div class = "carousel-inner">
+                        <img src="foto1.jpeg" alt="Primer encuentro">
+                        <img src="foto1.3.jpeg" alt="Primer encuentro">
+                        <img src="foto1.2.jpeg" alt="Primer encuentro">
+                        <img src="foto1.4.jpeg" alt="Primer encuentro">
+                        <img src="foto1.5.jpeg" alt="Primer encuentro">
+                        
+                    </div>
+                    <button class = "prev">&#10094;</button>
+                    <button class = "next">&#10095;</button>
                 </div>
             </article>
+                    
+                </div>
+            </article>
+
+            <!-- Segundo subapartado -->
             <article class="moment">
                 <strong>💬 Nuestras charlas</strong>
-                <div>Con cada conversación, me fui enamorando de tu forma de ser.
-                     <img src="foto2.jpeg" alt="Charlas">
+                <div class = "moment-description">
+                    Con cada conversación y con el paso del tiempo, me fui enamorando de tu forma de ser.
+                </div>
+                
+                <div class = "carousel">
+                    </div class = "carousel-inner">
+                        <img src="foto2.jpeg" alt="Charlas">
+                        <img src="foto2.1.jpeg" alt="Charlas">
+                        <img src="foto2.2.jpeg" alt="Charlas">
+                        <img src="foto2.3.jpeg" alt="Charlas">
+                        <img src="foto2.4.jpeg" alt="Charlas">
+                    </div>
+                    <button class = "prev">&#10094;</button>
+                    <button class = "next">&#10095;</button>
                 </div>
             </article>
+
+
+            <!-- Tercer subapartado -->
             <article class="moment">
                 <strong>🌷 Lo que construimos</strong>
-                <div>Pequeños detalles, risas y cariño que hicieron grande nuestra historia.
-                     <img src="foto3.jpeg" alt="Recuerdos">
+                <div class = "moment-description">
+                    Pequeños detalles, risas y cariño que hicieron grande nuestra historia.
                 </div>
+                <div class = "carousel">
+                    <div class = "carousel-inner">
+                        <img src="foto3.jpeg" alt="Recuerdos">
+                        <img src="foto3.1.jpeg" alt="Recuerdos">
+                        <img src="foto3.2.jpeg" alt="Recuerdos">
+                        <img src="foto3.3.jpeg" alt="Recuerdos">
+                        <img src="foto3.4.jpeg" alt="Recuerdos">
+                    </div>
+                    <button class = "prev">&#10094;</button>
+                    <button class = "next">&#10095;</button>
+                </div>
+                
             </article>
         </section>
         <!-- Calendario -->
@@ -272,6 +359,47 @@
     </main>
     <!-- Scripts -->
     <script>
+                
+        document.querySelectorAll('.moment .carousel').forEach((carousel) => {
+            const inner = carousel.querySelector('.carousel-inner');
+            const images = inner.querySelectorAll('img');
+            const prev = carousel.querySelector('.prev');
+            const next = carousel.querySelector('.next');
+
+            let index = 0;
+            let interval;
+
+            function showImage(idx) {
+                if (idx < 0) idx = images.length - 1;
+                if (idx >= images.length) idx = 0;
+                index = idx;
+                inner.style.transform = `translateX(${-index * 100}%)`;
+            }
+
+            function startAutoSlide() {
+                interval = setInterval(() => {
+                    showImage(index + 1);
+                }, 3000); // ⏱ cambia aquí el tiempo (ms)
+            }
+
+            function resetAutoSlide() {
+                clearInterval(interval);
+                startAutoSlide();
+            }
+
+            prev.addEventListener('click', () => {
+                showImage(index - 1);
+                resetAutoSlide();
+            });
+
+            next.addEventListener('click', () => {
+                showImage(index + 1);
+                resetAutoSlide();
+            });
+
+            startAutoSlide();
+        });
+
         // Calendario visual
         function generateCalendar() {
             const calendarDiv = document.getElementById("calendar");
