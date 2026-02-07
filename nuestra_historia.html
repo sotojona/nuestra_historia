@@ -264,10 +264,57 @@
 
             0%, 100% { transform: translateY(0); opacity: 1; }
             50% { transform: translateY(-8px); opacity: 0.7; }
-}
+        }
         
+
+
+
+        /*  Tortuguitas caminando */
+        .turtle {
+        position: absolute;
+        font-size: 48px;
+        z-index: 9999;
+        animation:bounce 0.8s ese-in-out infinite;
+        pointer-events: none;
+        }
+
+        /* Tortuga de abajo */
+        .turtle-1 {
+        top: 300px;
+        left: 20px;
+        animation-duration: 25s;
+        }
+
+        /* Tortuga de arriba */
+        .turtle-2 {
+        top: 900px;
+        left: 20px;
+        animation-duration: 35s;
+        transform: scaleX(-1); /* 👈 va mirando al otro lado */
+        }
+
+        /* Animación caminar */
+        @keyframes bounce{
+            0%, 100%{
+                transform: translateY(0);}
+            50% { transform: translateY(-6px);}
+        }
+        @keyframes walk {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(110vw);
+        }
+        }
     </style>
+
 </head>
+
+<div class="turtle turtle-1">🐢</div>
+<div class="turtle turtle-2">🐢</div>
+
+
 <body>
 
     <!-- Musica de fondo -->
@@ -456,6 +503,21 @@
         }
         const countdownInterval = setInterval(updateCountdown, 1000);
         updateCountdown();
+
+
+
+        const turtle1 = document.querySelector('.turtle-1');
+        const turtle2 = document.querySelector('.turtle-2');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+
+            // tortuga 1 se mueve a la derecha
+            turtle1.style.transform = `translateX(${scrollY * 0.15}px)`;
+
+            // tortuga 2 se mueve a la izquierda (y sigue mirando hacia atrás)
+            turtle2.style.transform = `translateX(${-scrollY * 0.1}px) scaleX(-1)`;
+});
     </script>
 </body>
 </html>
