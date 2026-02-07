@@ -141,24 +141,29 @@
             .moment {
                 padding: 14px;
             }
-
+        }
         /* Calendario */
         .calendar {
             width: 100%;
-            max-width: 300px;
+            max-width: 320px;
             margin: 20px auto;
             padding: 16px;
-            background: var(--card);
-            border-radius: 16px;
+            background: linear-gradient(135deg, #fff0f5, #ffe4ec);
+            border-radius: 20px;
             box-shadow: var(--shadow);
             text-align: center;
             font-family: "Segoe UI", Arial, sans-serif;
+            transition: transform 0.3s;
+        }
+        .calendar:hover {
+            transform: scale(1.03);
         }
 
         .calendar-header {
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 12px;
+            font-size: 1.2rem;
         }
 
         .calendar-grid {
@@ -177,21 +182,44 @@
             border-radius: 50%;
             transition: background 0.3s, color 0.3s;
         }
+        .calendar-date:hover {
+            background: var(--secondary);
+            color: white;
+            transform: scale(1.2);  
+        }
 
         .calendar-date.today {
             background: var(--primary);
             color: white;
+            animation: pulse 1.2s infinite;
+        }
+
+        /* Animación latido */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
         /* Countdown */
         .countdown {
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             margin: 20px 0;
-            color: var(--secondary);
             font-weight: 700;
+            background: linear-gradient(90deg, #ff85a2, #d6336c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: bounceFade 1s infinite;
+
         }
-        }
+
+        /* Animación rebote/desvanecimiento */
+    @keyframes bounceFade {
+
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-8px); opacity: 0.7; }
+}
+        
     </style>
 </head>
 <body>
@@ -298,13 +326,5 @@
         const countdownInterval = setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
-
-
-
-
-
-
-
-
 </body>
 </html>
