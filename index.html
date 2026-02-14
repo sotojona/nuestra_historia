@@ -3,231 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Destino Infinito 💘</title>
-
+<title>Prueba Botones</title>
 <style>
-body{
-    margin:0;
-    overflow:hidden;
-    font-family:Arial, sans-serif;
-    background: radial-gradient(circle at bottom,#14001f,#000);
-    color:white;
-}
-
-/* Canvas fondo */
-#bg{
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:0;
-}
-
-/* Canvas fuegos */
-#fireworks{
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:1;
-    pointer-events:none;
-}
-
-/* Contenido */
-.container{
-    position:absolute;
-    width:100%;
-    top:40%;
-    text-align:center;
-    z-index:2;
-}
-
-h1{
-    font-size:3rem;
-    text-shadow:0 0 20px #ff66cc;
-}
-
-button{
-    padding:15px 35px;
-    font-size:20px;
-    border-radius:50px;
-    border:none;
-    cursor:pointer;
-    margin:15px;
-    transition:.3s;
-    position:relative;
-    z-index:3;
-}
-
-.yes{
-    background:#ff1a75;
-    color:white;
-    box-shadow:0 0 30px #ff66a3;
-}
-
-.no{
-    background:white;
-    color:#990033;
-    position:absolute;
-}
-
-/* Pantalla final */
-.finalScreen{
-    position:fixed;
-    inset:0;
-    background:radial-gradient(circle,#1a001a,black);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    font-size:3rem;
-    opacity:0;
-    transition:1s;
-    z-index:3;
-}
+body { margin:0; font-family:Arial; background:pink; display:flex; justify-content:center; align-items:center; height:100vh; }
+.container{text-align:center;}
+button{padding:20px 40px; margin:10px; font-size:1.5rem; cursor:pointer;}
 </style>
 </head>
-
 <body>
-
-<canvas id="bg"></canvas>
-<canvas id="fireworks"></canvas>
-
 <div class="container">
-    <h1>¿QUIERES SER MI SAN VALENTÍN? 💖</h1>
-    <button class="yes" id="yesBtn">SÍ 💘</button>
-    <button class="no" id="noBtn">NO 💔</button>
+<h1>¿Quieres ser mi San Valentín? 💖</h1>
+<button id="yesBtn">SÍ 💘</button>
+<button id="noBtn">NO 💔</button>
 </div>
-
-<div class="finalScreen" id="finalScreen">
-    <div id="finalText"></div>
-    <div style="font-size:6rem;">💍</div>
-</div>
-
 <script>
-window.onload = function() {
-
-const nombre = "MARIA"; // Cambia por el nombre que quieras
-
-/* ===== CANVAS Y REDIMENSION ===== */
-const bg = document.getElementById("bg");
-const fw = document.getElementById("fireworks");
-const ctxBg = bg.getContext("2d");
-const ctxFw = fw.getContext("2d");
-
-function resizeCanvas(){
-    bg.width = window.innerWidth;
-    bg.height = window.innerHeight;
-    fw.width = window.innerWidth;
-    fw.height = window.innerHeight;
-}
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
-
-/* ===== ESTRELLAS ===== */
-let stars = [];
-for(let i=0;i<200;i++){
-    stars.push({
-        x:Math.random()*bg.width,
-        y:Math.random()*bg.height,
-        r:Math.random()*2,
-        s:Math.random()*0.5
-    });
-}
-
-function animateStars(){
-    ctxBg.clearRect(0,0,bg.width,bg.height);
-    ctxBg.fillStyle="white";
-    stars.forEach(star=>{
-        ctxBg.beginPath();
-        ctxBg.arc(star.x,star.y,star.r,0,Math.PI*2);
-        ctxBg.fill();
-        star.y += star.s;
-        if(star.y>bg.height) star.y=0;
-    });
-    requestAnimationFrame(animateStars);
-}
-animateStars();
-
-/* ===== BOTÓN NO ===== */
-const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
-let escape=0;
-
-noBtn.addEventListener("mouseover", ()=>{
-    const x=Math.random()*(window.innerWidth-150);
-    const y=Math.random()*(window.innerHeight-80);
-    noBtn.style.left=x+"px";
-    noBtn.style.top=y+"px";
-
-    escape++;
-    yesBtn.style.transform=`scale(${1+escape*0.2})`;
-    if(escape>5) noBtn.style.display="none";
-});
-
-/* ===== FUEGOS ARTIFICIALES ===== */
-let particles=[];
-
-function createFirework(){
-    let x=Math.random()*fw.width;
-    let y=Math.random()*fw.height/2;
-
-    for(let i=0;i<80;i++){
-        particles.push({
-            x:x,
-            y:y,
-            dx:(Math.random()-0.5)*6,
-            dy:(Math.random()-0.5)*6,
-            life:100
-        });
-    }
-}
-
-function animateFireworks(){
-    ctxFw.clearRect(0,0,fw.width,fw.height);
-    particles.forEach((p,index)=>{
-        p.x+=p.dx;
-        p.y+=p.dy;
-        p.life--;
-
-        ctxFw.beginPath();
-        ctxFw.arc(p.x,p.y,2,0,Math.PI*2);
-        ctxFw.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
-        ctxFw.fill();
-
-        if(p.life<=0) particles.splice(index,1);
-    });
-    requestAnimationFrame(animateFireworks);
-}
-animateFireworks();
-
-/* ===== VOZ ===== */
-function hablar(texto){
-    const msg = new SpeechSynthesisUtterance(texto);
-    msg.lang="es-ES";
-    msg.rate = 0.9;
-    msg.pitch = 1.2;
-    speechSynthesis.cancel();
-    speechSynthesis.speak(msg);
-}
-
-/* ===== ACEPTAR ===== */
-const finalScreen = document.getElementById("finalScreen");
-const finalText = document.getElementById("finalText");
+const noBtn = document.getElementById("noBtn");
 
 yesBtn.addEventListener("click", ()=>{
-    hablar(nombre + ", ahora somos eternos en el universo.");
-
-    finalText.innerHTML = nombre+" 💖<br>El universo nos pertenece ✨";
-    finalScreen.style.opacity = "1";
-
-    setInterval(createFirework,700);
-
-    setTimeout(()=>{
-        window.location.href="nuestra_historia.html";
-    },8000);
+  alert("Botón SÍ funciona");
+  window.location.href="/nuestra_historia.html";
 });
 
-} // fin window.onload
+noBtn.addEventListener("mouseover", ()=>{
+  noBtn.style.position="absolute";
+  noBtn.style.left=Math.random()*(window.innerWidth-100)+"px";
+  noBtn.style.top=Math.random()*(window.innerHeight-50)+"px";
+});
 </script>
-
 </body>
 </html>
