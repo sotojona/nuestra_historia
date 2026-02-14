@@ -67,7 +67,7 @@ canvas {
 <script>
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
-const nombre = "MARIA"; // Cambia el nombre
+const nombre = "MARIA DE LOS ANGELES"; 
 const fw = document.getElementById("fireworks");
 const ctxFw = fw.getContext("2d");
 
@@ -120,6 +120,12 @@ yesBtn.addEventListener("click", ()=>{
     msg.pitch = 1.2;
     speechSynthesis.cancel();
     speechSynthesis.speak(msg);
+
+    // Reproducir bocina justo después de hablar
+    msg.onend = () => {
+        const horn = new Audio("bocina.mp3"); //
+        horn.play();
+    }
 
     // Explosiones alrededor de la pantalla
     const interval = setInterval(()=>{
