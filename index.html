@@ -14,11 +14,21 @@ body{
     color:white;
 }
 
-/* Canvas */
-canvas{
+/* Canvas fondo */
+#bg{
     position:fixed;
     top:0;
     left:0;
+    z-index:0;
+}
+
+/* Canvas fuegos */
+#fireworks{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1;
+    pointer-events:none;
 }
 
 /* Contenido */
@@ -30,11 +40,6 @@ canvas{
     z-index:2;
 }
 
-h1{
-    font-size:3rem;
-    text-shadow:0 0 20px #ff66cc;
-}
-
 button{
     padding:15px 35px;
     font-size:20px;
@@ -43,6 +48,8 @@ button{
     cursor:pointer;
     margin:15px;
     transition:.3s;
+    position:relative;
+    z-index:3;
 }
 
 .yes{
@@ -57,6 +64,7 @@ button{
     position:absolute;
 }
 
+/* Pantalla final */
 .finalScreen{
     position:fixed;
     inset:0;
@@ -72,7 +80,6 @@ button{
 }
 </style>
 </head>
-
 <body>
 
 <canvas id="bg"></canvas>
