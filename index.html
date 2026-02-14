@@ -28,7 +28,7 @@ body{
     top:0;
     left:0;
     z-index:1;
-    pointer-events:none;
+    pointer-events:none; /* no bloquea clics */
 }
 
 /* Contenido */
@@ -38,6 +38,11 @@ body{
     top:40%;
     text-align:center;
     z-index:2;
+}
+
+h1{
+    font-size:3rem;
+    text-shadow:0 0 20px #ff66cc;
 }
 
 button{
@@ -80,6 +85,7 @@ button{
 }
 </style>
 </head>
+
 <body>
 
 <canvas id="bg"></canvas>
@@ -97,13 +103,20 @@ button{
 </div>
 
 <script>
-const nombre = "MARIA"; // CAMBIA ESTO
+const nombre = "MARIA"; // Cambia por el nombre que quieras
 
 /* ===== ESTRELLAS ===== */
 const bg = document.getElementById("bg");
 const ctxBg = bg.getContext("2d");
-bg.width = window.innerWidth;
-bg.height = window.innerHeight;
+
+function resizeCanvas(){
+    bg.width = window.innerWidth;
+    bg.height = window.innerHeight;
+    fw.width = window.innerWidth;
+    fw.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
 
 let stars = [];
 for(let i=0;i<200;i++){
@@ -130,11 +143,11 @@ function animateStars(){
 animateStars();
 
 /* ===== BOTÓN NO ===== */
-const noBtn=document.getElementById("noBtn");
-const yesBtn=document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
 let escape=0;
 
-noBtn.addEventListener("mouseover",()=>{
+noBtn.addEventListener("mouseover", ()=>{
     const x=Math.random()*(window.innerWidth-150);
     const y=Math.random()*(window.innerHeight-80);
     noBtn.style.left=x+"px";
@@ -146,10 +159,8 @@ noBtn.addEventListener("mouseover",()=>{
 });
 
 /* ===== FUEGOS ARTIFICIALES ===== */
-const fw=document.getElementById("fireworks");
-const ctxFw=fw.getContext("2d");
-fw.width=window.innerWidth;
-fw.height=window.innerHeight;
+const fw = document.getElementById("fireworks");
+const ctxFw = fw.getContext("2d");
 
 let particles=[];
 
@@ -197,11 +208,10 @@ function hablar(texto){
 }
 
 /* ===== ACEPTAR ===== */
-const finalScreen=document.getElementById("finalScreen");
-const finalText=document.getElementById("finalText");
+const finalScreen = document.getElementById("finalScreen");
+const finalText = document.getElementById("finalText");
 
-yesBtn.addEventListener("click",()=>{
-
+yesBtn.addEventListener("click", ()=>{
     hablar(nombre + ", ahora somos eternos en el universo.");
 
     finalText.innerHTML=nombre+" 💖<br>El universo nos pertenece ✨";
