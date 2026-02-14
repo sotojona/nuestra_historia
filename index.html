@@ -6,70 +6,69 @@
 <title>Destino Infinito 💘</title>
 
 <style>
-body {
-    margin: 0;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    background: radial-gradient(circle at bottom, #14001f, #000);
-    color: white;
+body{
+    margin:0;
+    overflow:hidden;
+    font-family:Arial, sans-serif;
+    background: radial-gradient(circle at bottom,#14001f,#000);
+    color:white;
 }
 
-/* Canvas fondo */
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* Canvas */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
 }
 
 /* Contenido */
-.container {
-    position: absolute;
-    width: 100%;
-    top: 40%;
-    text-align: center;
-    z-index: 2;
+.container{
+    position:absolute;
+    width:100%;
+    top:40%;
+    text-align:center;
+    z-index:2;
 }
 
-h1 {
-    font-size: 3rem;
-    text-shadow: 0 0 20px #ff66cc;
+h1{
+    font-size:3rem;
+    text-shadow:0 0 20px #ff66cc;
 }
 
-button {
-    padding: 15px 35px;
-    font-size: 20px;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    margin: 15px;
-    transition: 0.3s;
+button{
+    padding:15px 35px;
+    font-size:20px;
+    border-radius:50px;
+    border:none;
+    cursor:pointer;
+    margin:15px;
+    transition:.3s;
 }
 
-.yes {
-    background: #ff1a75;
-    color: white;
-    box-shadow: 0 0 30px #ff66a3;
+.yes{
+    background:#ff1a75;
+    color:white;
+    box-shadow:0 0 30px #ff66a3;
 }
 
-.no {
-    background: white;
-    color: #990033;
-    position: absolute;
+.no{
+    background:white;
+    color:#990033;
+    position:absolute;
 }
 
-/* Pantalla final */
-.finalScreen {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle, #1a001a, black);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 3rem;
-    opacity: 0;
-    transition: 1s;
-    z-index: 3;
+.finalScreen{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle,#1a001a,black);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-size:3rem;
+    opacity:0;
+    transition:1s;
+    z-index:3;
 }
 </style>
 </head>
@@ -91,104 +90,121 @@ button {
 </div>
 
 <script>
-const nombre = "MARIA DE LOS ANGELES LINCE VALENCIA"; // CAMBIA ESTO
+const nombre = "MARIA"; // CAMBIA ESTO
 
+/* ===== ESTRELLAS ===== */
 const bg = document.getElementById("bg");
 const ctxBg = bg.getContext("2d");
-
 bg.width = window.innerWidth;
 bg.height = window.innerHeight;
 
-/* Crear estrellas */
 let stars = [];
-for (let i = 0; i < 200; i++) {
+for(let i=0;i<200;i++){
     stars.push({
-        x: Math.random() * bg.width,
-        y: Math.random() * bg.height,
-        radius: Math.random() * 2,
-        speed: Math.random() * 0.5
+        x:Math.random()*bg.width,
+        y:Math.random()*bg.height,
+        r:Math.random()*2,
+        s:Math.random()*0.5
     });
 }
 
-function animateStars() {
-    ctxBg.clearRect(0, 0, bg.width, bg.height);
-    ctxBg.fillStyle = "white";
-
-    stars.forEach(star => {
+function animateStars(){
+    ctxBg.clearRect(0,0,bg.width,bg.height);
+    ctxBg.fillStyle="white";
+    stars.forEach(star=>{
         ctxBg.beginPath();
-        ctxBg.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctxBg.arc(star.x,star.y,star.r,0,Math.PI*2);
         ctxBg.fill();
-
-        star.y += star.speed;
-        if (star.y > bg.height) star.y = 0;
+        star.y+=star.s;
+        if(star.y>bg.height) star.y=0;
     });
-
     requestAnimationFrame(animateStars);
 }
 animateStars();
 
-/* Botón NO huye */
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-let escape = 0;
+/* ===== BOTÓN NO ===== */
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+let escape=0;
 
-noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 80);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+noBtn.addEventListener("mouseover",()=>{
+    const x=Math.random()*(window.innerWidth-150);
+    const y=Math.random()*(window.innerHeight-80);
+    noBtn.style.left=x+"px";
+    noBtn.style.top=y+"px";
 
     escape++;
-    yesBtn.style.transform = `scale(${1 + escape * 0.2})`;
-
-    if (escape > 5) noBtn.style.display = "none";
+    yesBtn.style.transform=`scale(${1+escape*0.2})`;
+    if(escape>5) noBtn.style.display="none";
 });
 
-/* Fuegos artificiales */
-const fw = document.getElementById("fireworks");
-const ctxFw = fw.getContext("2d");
-fw.width = window.innerWidth;
-fw.height = window.innerHeight;
+/* ===== FUEGOS ARTIFICIALES ===== */
+const fw=document.getElementById("fireworks");
+const ctxFw=fw.getContext("2d");
+fw.width=window.innerWidth;
+fw.height=window.innerHeight;
 
-function firework(x, y) {
-    for (let i = 0; i < 100; i++) {
-        const angle = Math.random() * 2 * Math.PI;
-        const speed = Math.random() * 5;
-        const dx = Math.cos(angle) * speed;
-        const dy = Math.sin(angle) * speed;
+let particles=[];
 
-        ctxFw.beginPath();
-        ctxFw.arc(x + dx * 10, y + dy * 10, 2, 0, 2 * Math.PI);
-        ctxFw.fillStyle = `hsl(${Math.random()*360},100%,60%)`;
-        ctxFw.fill();
+function createFirework(){
+    let x=Math.random()*fw.width;
+    let y=Math.random()*fw.height/2;
+
+    for(let i=0;i<80;i++){
+        particles.push({
+            x:x,
+            y:y,
+            dx:(Math.random()-0.5)*6,
+            dy:(Math.random()-0.5)*6,
+            life:100
+        });
     }
 }
 
-/* Voz */
-function hablar(texto) {
-    const msg = new SpeechSynthesisUtterance(texto);
-    msg.lang = "es-ES";
+function animateFireworks(){
+    ctxFw.clearRect(0,0,fw.width,fw.height);
+    particles.forEach((p,index)=>{
+        p.x+=p.dx;
+        p.y+=p.dy;
+        p.life--;
+
+        ctxFw.beginPath();
+        ctxFw.arc(p.x,p.y,2,0,Math.PI*2);
+        ctxFw.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
+        ctxFw.fill();
+
+        if(p.life<=0) particles.splice(index,1);
+    });
+    requestAnimationFrame(animateFireworks);
+}
+animateFireworks();
+
+/* ===== VOZ ===== */
+function hablar(texto){
+    const msg=new SpeechSynthesisUtterance(texto);
+    msg.lang="es-ES";
+    msg.rate=0.9;
+    msg.pitch=1.2;
+    speechSynthesis.cancel();
     speechSynthesis.speak(msg);
 }
 
-/* Aceptar */
-const finalScreen = document.getElementById("finalScreen");
-const finalText = document.getElementById("finalText");
+/* ===== ACEPTAR ===== */
+const finalScreen=document.getElementById("finalScreen");
+const finalText=document.getElementById("finalText");
 
-yesBtn.addEventListener("click", () => {
+yesBtn.addEventListener("click",()=>{
 
-    hablar(nombre + ", ahora somos eternos.");
+    hablar(nombre + ", ahora somos eternos en el universo.");
 
-    finalText.innerHTML = nombre + " 💖<br>El universo nos pertenece ✨";
-    finalScreen.style.opacity = "1";
+    finalText.innerHTML=nombre+" 💖<br>El universo nos pertenece ✨";
+    finalScreen.style.opacity="1";
 
-    setInterval(() => {
-        firework(Math.random() * fw.width, Math.random() * fw.height);
-    }, 500);
+    setInterval(createFirework,700);
 
-    setTimeout(() => {
-        window.location.href = "nuestra_historia.html";
-    }, 7000);
+    setTimeout(()=>{
+        window.location.href="nuestra_historia.html";
+    },8000);
 });
 </script>
 
